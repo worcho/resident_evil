@@ -2,6 +2,7 @@ package com.example.Resident.Evil.entities;
 
 import com.example.Resident.Evil.entities.enums.VirusMagnitude;
 import com.example.Resident.Evil.entities.enums.VirusMutation;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
@@ -71,6 +72,7 @@ public class Virus {
                     referencedColumnName = "capitalId"
             )
     )
+    @JsonIgnore
     private Set<Capital> capitals;
 
 

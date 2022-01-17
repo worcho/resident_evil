@@ -23,4 +23,11 @@ public interface VirusRepository extends JpaRepository<Virus,Long> {
     Long getIdByName(String name);
 
     List<Virus> findAll();
+
+
+    @Query(value = "SELECT capital.name FROM capital\n" +
+            "join viruses_capitals on capital.capital_id=viruses_capitals.capital_id\n" +
+            " where virus_id=?1"
+            , nativeQuery = true)
+    List<String> findAllVirusCapitals(Long id);
 }

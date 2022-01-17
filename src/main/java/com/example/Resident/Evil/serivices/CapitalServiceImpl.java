@@ -1,10 +1,14 @@
 package com.example.Resident.Evil.serivices;
 
 import com.example.Resident.Evil.entities.Capital;
+import com.example.Resident.Evil.models.service.CapitalPage;
 import com.example.Resident.Evil.models.service.CapitalServiceModel;
 import com.example.Resident.Evil.repositories.CapitalRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -46,6 +50,12 @@ public class CapitalServiceImpl implements CapitalService{
             listNames.add(capitalList.get(i).getName());
         }
         return listNames;
+    }
+
+    @Override
+    public Page<Capital> getCapitals(Pageable pageable) {
+  //      Pageable pageable = PageRequest.of(capitalPage.getPageNumber(),capitalPage.getPageSize());
+        return this.capitalRepository.findAll(pageable);
     }
 
 

@@ -5,26 +5,36 @@ import com.example.Resident.Evil.entities.Capital;
 import com.example.Resident.Evil.entities.enums.VirusMagnitude;
 import com.example.Resident.Evil.entities.enums.VirusMutation;
 
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Set;
 
 public class AddVirusBindingModel {
 
-    @Size(min = 3, max = 10, message = "Name must be between 3 and 15 symbols")
+    @NotEmpty(message = "Virus name cannot be empty.")
+    @Size(min=3, max=10, message = "Virus name must be between 3 and 10 symbols long.")
     private String name;
+    @NotEmpty(message = "Virus description cannot be empty.")
+    @Size(min=5, max=100, message = "Virus description must be between 5 and 100 symbols long.")
     private String description;
+    @Size(max=50, message = "Virus side effects must be up to 50 symbols long.")
     private String sideEffects;
+    @Pattern(regexp = "^(Corp.|corp.)$", message = "Virus creator must either be 'Corp.' or 'corp.'")
     private String creator;
     private String isDeadly;
     private String isCurable;
     private VirusMutation mutation;
+    @Min(value = 0, message = "Virus turnover rate must be greater than or equal to 0.")
+    @Max(value = 100, message = "Virus turnover rate must be less than or equal to 100.")
     private Integer turnoverRate;
+    @Min(value = 1, message = "Virus turnover rate must be greater than or equal to 1.")
+    @Max(value = 12, message = "Virus turnover rate must be less than or equal to 12.")
     private Integer hoursUntilTurn;
     private VirusMagnitude magnitude;
     private String releaseOn;
     private String[] capitals;
+
 
     public String getName() {
         return name;

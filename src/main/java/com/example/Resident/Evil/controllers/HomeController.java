@@ -5,6 +5,7 @@ import com.example.Resident.Evil.serivices.CapitalService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
@@ -24,6 +25,12 @@ public class HomeController {
     public ModelAndView index(ModelAndView modelAndView){
         modelAndView.setViewName("index");
         modelAndView.addObject("capitals",capitalService.getAllCapitals());
+        return modelAndView;
+    }
+
+    @PostMapping("/")
+    public ModelAndView indexPost(ModelAndView modelAndView){
+        modelAndView.setViewName("index");
         return modelAndView;
     }
 }

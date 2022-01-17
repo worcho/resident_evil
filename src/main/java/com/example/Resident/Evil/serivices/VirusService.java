@@ -10,4 +10,6 @@ public interface VirusService {
     void saveMany(Long virusId, AddVirusBindingModel model);
 
     void editVirus(Long virusId,AddVirusBindingModel model);
+
+    String getMap();
 }

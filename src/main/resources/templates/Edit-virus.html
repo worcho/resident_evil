@@ -5,30 +5,32 @@
     <th:block th:include="fragments/head"></th:block>
     <title>Title</title>
 </head>
-<body>
+<body style="background-image: url('https://images.pexels.com/photos/325185/pexels-photo-325185.jpeg?cs=srgb&dl=pexels-aleksandar-pasaric-325185.jpg&fm=jpg');">
 <div>
     <th:block th:include="fragments/navbar"></th:block>
-</div>
-<div class="container">
+<div class="container" >
 
     <form th:action="@{/edit}" th:method="POST">
 
         <div class="form-group mt-4">
-            <label for="name" >Name</label>
-            <input type="text" class="form-control" id="name" name="name"  th:field="${addVirusBindingModel.name}"/>
+            <label for="name" >Name</label >
+            <input type="text" class="form-control" id="name" name="name"  th:value="${virusInput.name}"/>
             <div class="alert alert-warning" th:if="${#fields.hasErrors('addVirusBindingModel.name')}" th:errors="*{addVirusBindingModel.name}"></div>
         </div>
         <div class="form-group mt-4">
             <label for="description">Description</label>
-            <textarea style="resize: none;" class="form-control" id="description" name="description" rows="3" ></textarea>
+            <textarea style="resize: none;" class="form-control" id="description" name="description" rows="3" th:text="${virusInput.description}"></textarea>
+            <div class="alert alert-warning" th:if="${#fields.hasErrors('addVirusBindingModel.description')}" th:errors="*{addVirusBindingModel.description}"></div>
         </div>
         <div class="form-group mt-4">
             <label for="sideEffect">Side Effect</label>
-            <input type="text" class="form-control" id="sideEffect" name="sideEffects" th:value="${effect}"/>
+            <input type="text" class="form-control" id="sideEffect" name="sideEffects" th:value="${virusInput.sideEffects}"/>
+            <div class="alert alert-warning" th:if="${#fields.hasErrors('addVirusBindingModel.sideEffects')}" th:errors="*{addVirusBindingModel.sideEffects}"></div>
         </div>
         <div class="form-group mt-4">
             <label for="creator">Creator</label>
-            <input type="text" class="form-control" id="creator" name="creator" />
+            <input type="text" class="form-control" id="creator" name="creator" th:value="${virusInput.creator}"/>
+            <div class="alert alert-warning" th:if="${#fields.hasErrors('addVirusBindingModel.creator')}" th:errors="*{addVirusBindingModel.creator}"></div>
         </div>
         <div class="form-check mt-5">
             <input class="form-check-input" type="checkbox" value="Yes" id="isDeadly" name="isDeadly" >
@@ -42,6 +44,8 @@
                 Id Curable?
             </label>
         </div>
+        <h3>The mutation was: </h3>
+        <p th:text="${virusInput.mutation}"></p>
         <div class="form-check">
             <input class="form-check-input" type="radio" name="mutation" id="flexRadioDefault1" value="ZOMBIE">
             <label class="form-check-label" for="flexRadioDefault1">
@@ -62,11 +66,13 @@
         </div>
         <div class="form-group mt-4">
             <label for="turnoverRate">Turnover Rate</label>
-            <input type="number" class="form-control" id="turnoverRate" name="turnoverRate" />
+            <input type="number" class="form-control" id="turnoverRate" name="turnoverRate" th:value="${virusInput.turnoverRate}"/>
+            <div class="alert alert-warning" th:if="${#fields.hasErrors('addVirusBindingModel.turnoverRate')}" th:errors="*{addVirusBindingModel.turnoverRate}"></div>
         </div>
         <div class="form-group mt-4">
             <label for="hoursUntilTurn">Hours Until Turn</label>
-            <input type="number" class="form-control" id="hoursUntilTurn" name="hoursUntilTurn" />
+            <input type="number" class="form-control" id="hoursUntilTurn" name="hoursUntilTurn" th:value="${virusInput.hoursUntilTurn}"/>
+            <div class="alert alert-warning" th:if="${#fields.hasErrors('addVirusBindingModel.hoursUntilTurn')}" th:errors="*{addVirusBindingModel.hoursUntilTurn}"></div>
         </div>
         <div class="form-group mt-4">
             <label for="magnitude">Magnitude</label>
@@ -76,8 +82,15 @@
                 <option value="HIGH">High</option>
             </select>
         </div>
+        <div class="form-group mt-4">
+            <label>Capitals: </label>
+                <th:block th:each="capital : ${caps}">
+                    <h3 th:text="*{capital}"></h3>
+                </th:block>
+        </div>
         <button type="submit" class="btn btn-primary mt-4">Submit</button>
     </form>
+</div>
 </div>
 </body>
 </html>

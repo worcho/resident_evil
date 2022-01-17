@@ -1,14 +1,15 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
 <th:block th:include="fragments/head"></th:block>
-<body>
+<body style="background-image: url('https://images.pexels.com/photos/325185/pexels-photo-325185.jpeg?cs=srgb&dl=pexels-aleksandar-pasaric-325185.jpg&fm=jpg');">
 <th:block th:include="fragments/navbar"></th:block>
 
-
-
-<th:block th:each="capital : ${capitals}" th:object="${capital}">
-    <h1 class="text-center" th:text="|Name: *{name}, Latitude: *{latitude}, Longitude: *{longitude}|"></h1>
-</th:block>
-
+<p th:if="${name != null}" th:text="${name.username}"></p>
+<div sec:authorize="hasRole('ROLE_USER')">
+    This content is only shown to users.
+</div>
+<div sec:authorize="hasRole('ROLE_ADMIN')">
+    This content is only shown to admins.
+</div>
 </body>
 </html>

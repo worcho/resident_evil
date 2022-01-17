@@ -1,6 +1,8 @@
 package com.example.Resident.Evil.entities;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Set;
 
@@ -18,6 +20,7 @@ public class Capital {
         @Column(nullable = false)
         private Double Longitude;
 
+        @JsonIgnore
         @ManyToMany(mappedBy = "capitals", fetch = FetchType.LAZY)
         private Set<Virus> virusSet;
 
