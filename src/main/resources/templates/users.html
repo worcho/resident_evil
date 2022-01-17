@@ -23,8 +23,8 @@
             <th th:text="*{username}"></th>
             <th th:text="*{email}"></th>
             <th th:text="*{role}"></th>
-            <th><a class="btn btn-primary" role="button">Edit</a></th>
-            <th><a class="btn btn-danger" role="button">Delete</a></th>
+            <th><a th:href=@{edit/{id}(id=${user.id})} class="btn btn-primary" role="button">Edit</a></th>
+            <th><a th:href=@{delete/{id}(id=${user.id})} class="btn btn-danger" role="button">Delete</a></th>
         </tr>
         </tbody>
     </table>

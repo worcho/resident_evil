@@ -9,11 +9,11 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.List;
 
 @RestController
-public class RESTvirusController {
+public class RESTVirusController {
 
     private final VirusRepository virusRepository;
 
-    public RESTvirusController(VirusRepository virusRepository) {
+    public RESTVirusController(VirusRepository virusRepository) {
         this.virusRepository = virusRepository;
     }
 

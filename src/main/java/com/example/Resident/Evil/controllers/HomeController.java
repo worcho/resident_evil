@@ -14,20 +14,6 @@ import java.util.List;
 @Controller
 public class HomeController {
 
-    private final CapitalService capitalService;
-
-    public HomeController(CapitalService capitalService) {
-        this.capitalService = capitalService;
-    }
-
-
-    @GetMapping("/")
-    public ModelAndView index(ModelAndView modelAndView){
-        modelAndView.setViewName("index");
-        modelAndView.addObject("capitals",capitalService.getAllCapitals());
-        return modelAndView;
-    }
-
     @PostMapping("/")
     public ModelAndView indexPost(ModelAndView modelAndView){
         modelAndView.setViewName("index");

@@ -63,30 +63,4 @@ public class UserController {
         return modelAndView;
     }
 
-/*
-    @GetMapping("/login")
-    ModelAndView login(ModelAndView modelAndView, RegisterUserBindingModel registerUserBindingModel){
-        modelAndView.setViewName("login");
-        modelAndView.addObject("registerUserBindingModel", registerUserBindingModel);
-        return modelAndView;
-    }
-
-    @PostMapping("/login")
-    ModelAndView loginPost(ModelAndView modelAndView, RegisterUserBindingModel registerUserBindingModel, HttpSession session){
-
-        if (userService.loginUser(registerUserBindingModel)){
-            session.setAttribute("name",registerUserBindingModel);
-            System.out.println("Login");
-        }else{
-            ModelAndView modelAndView1 = new ModelAndView();
-            modelAndView1.setViewName("login");
-            modelAndView1.addObject("loginError", "Invalid Username or Password.");
-            return modelAndView1;
-        }
-        modelAndView.setViewName("login");
-        modelAndView.addObject("registerUserBindingModel", registerUserBindingModel);
-        return modelAndView;
-    }
-
- */
 }

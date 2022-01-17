@@ -2,7 +2,6 @@ package com.example.Resident.Evil.controllers;
 
 import com.example.Resident.Evil.entities.Capital;
 import com.example.Resident.Evil.entities.Virus;
-import com.example.Resident.Evil.models.service.CapitalPage;
 import com.example.Resident.Evil.repositories.CapitalRepository;
 import com.example.Resident.Evil.serivices.CapitalService;
 import org.springframework.data.domain.Page;

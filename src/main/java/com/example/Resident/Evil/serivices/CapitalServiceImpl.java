@@ -1,7 +1,6 @@
 package com.example.Resident.Evil.serivices;
 
 import com.example.Resident.Evil.entities.Capital;
-import com.example.Resident.Evil.models.service.CapitalPage;
 import com.example.Resident.Evil.models.service.CapitalServiceModel;
 import com.example.Resident.Evil.repositories.CapitalRepository;
 import org.modelmapper.ModelMapper;

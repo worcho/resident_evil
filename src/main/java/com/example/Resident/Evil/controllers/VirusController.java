@@ -106,13 +106,4 @@ public class VirusController {
         return modelAndView;
     }
 
-    @GetMapping("/m/{id}")
-    public ModelAndView m(@PathVariable Long id, ModelAndView modelAndView, Model model, AddVirusBindingModel addVirusBindingModel) {
-        VirusServiceModel virusById = modelMapper.map(virusRepository.getById(id), VirusServiceModel.class);
-        String pedal = virusById.getName();
-        model.addAttribute("pedal", pedal);
-        modelAndView.setViewName("mamkaMu");
-        return modelAndView;
-    }
-
 }
