@@ -24,7 +24,6 @@ public class VirusServiceImpl implements VirusService{
 
     @Override
     public Virus getVirusFromForm(AddVirusBindingModel model) {
-
         Virus virus = new Virus();
         virus.setName(model.getName());
         virus.setDescription(model.getDescription());
@@ -43,11 +42,9 @@ public class VirusServiceImpl implements VirusService{
         if (virus.getIsCurable() == null){
             virus.setIsCurable("No");
         }
-
         virus.setCapitals(Arrays.stream(model.getCapitals())
                 .map(x -> capitalRepository.findByName(x))
                 .collect(Collectors.toSet()));
-
         return virus;
     }
 

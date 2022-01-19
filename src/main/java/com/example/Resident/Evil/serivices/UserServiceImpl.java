@@ -2,6 +2,7 @@ package com.example.Resident.Evil.serivices;
 
 import com.example.Resident.Evil.entities.User;
 import com.example.Resident.Evil.models.binding.RegisterUserBindingModel;
+import com.example.Resident.Evil.models.service.UserServiceModel;
 import com.example.Resident.Evil.repositories.UserRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +39,19 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         user.setPassword(passwordEncoder.encode(userBindingModel.getPassword()));
         user.setRole("USER");
         userRepository.save(user);
+    }
+
+    @Override
+    public void editUser(Long userId, UserServiceModel userServiceModel) {
+        User user = userRepository.getById(userId);
+        user.setRole(userServiceModel.getRole());
+
+        userRepository.save(user);
+    }
+
+    @Override
+    public void deleteUser(Long id) {
+        userRepository.deleteById(id);
     }
 
     @Override

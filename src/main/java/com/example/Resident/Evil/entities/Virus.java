@@ -16,48 +16,32 @@ public class Virus {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "virusId", nullable = false, updatable = false)
     private Long virusId;
-
     @Column(nullable = false, unique = true)
     private String name;
-
     public Long getVirusId() {
         return virusId;
     }
-
     public void setVirusId(Long virusId) {
         this.virusId = virusId;
     }
-
     @Column(nullable = false)
     private String description;
-
     @Column(nullable = false)
     private String sideEffects;
-
     @Column(nullable = false)
     private String creator;
-
-
     private String isDeadly;
-
-
     private String isCurable;
-
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private VirusMutation mutation;
-
     @Column(nullable = false)
     private Integer turnoverRate;
-
     @Column(nullable = false)
     private Integer hoursUntilTurn;
-
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private VirusMagnitude magnitude;
-
-
     private String releaseOn;
 
     @ManyToMany(fetch = FetchType.LAZY)

@@ -23,16 +23,14 @@ import java.util.List;
 public class VirusController {
 
     private final CapitalService capitalService;
-    private final CapitalRepository capitalRepository;
     private final VirusRepository virusRepository;
     private final VirusService virusService;
     private final ModelMapper modelMapper;
     Long virusesId;
 
 
-    public VirusController(CapitalService capitalService, CapitalRepository capitalRepository, VirusRepository virusRepository, VirusService virusService, ModelMapper modelMapper) {
+    public VirusController(CapitalService capitalService, VirusRepository virusRepository, VirusService virusService, ModelMapper modelMapper) {
         this.capitalService = capitalService;
-        this.capitalRepository = capitalRepository;
         this.virusRepository = virusRepository;
         this.virusService = virusService;
         this.modelMapper = modelMapper;
@@ -48,14 +46,13 @@ public class VirusController {
     }
 
     @PostMapping("/add")
-    public ModelAndView addVirus(@Valid @ModelAttribute AddVirusBindingModel addVirusBindingModel, BindingResult result, ModelAndView modelAndView, RedirectAttributes redirectAttributes) {
+    public ModelAndView addVirus(@Valid @ModelAttribute AddVirusBindingModel addVirusBindingModel, BindingResult result, ModelAndView modelAndView) {
         if (result.hasErrors()){
             ModelAndView modelAndView1 = new ModelAndView();
             modelAndView1.setViewName("Add-virus");
             modelAndView1.addObject("caps", capitalService.getAllCapitalsNames());
             modelAndView1.addObject("capsAfterError", addVirusBindingModel.getCapitals());
             return modelAndView1;
-
         }
         virusRepository.save(virusService.getVirusFromForm(addVirusBindingModel));
         modelAndView.setViewName("redirect:/show");
@@ -78,6 +75,7 @@ public class VirusController {
             AddVirusBindingModel bindingModel = modelMapper.map(virusById, AddVirusBindingModel.class);
             model.addAttribute("caps", virusRepository.findAllVirusCapitals(virusesId));
             model.addAttribute("virusInput", bindingModel);
+            model.addAttribute("flag", true);
         }
         modelAndView.addObject("addVirusBindingModel",addVirusBindingModel);
 

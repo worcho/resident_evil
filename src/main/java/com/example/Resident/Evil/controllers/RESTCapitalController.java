@@ -16,11 +16,9 @@ import java.util.List;
 @RestController
 public class RESTCapitalController {
 
-    private final CapitalService capitalService;
     private final CapitalRepository capitalRepository;
 
-    public RESTCapitalController(CapitalService capitalService, CapitalRepository capitalRepository) {
-        this.capitalService = capitalService;
+    public RESTCapitalController(CapitalRepository capitalRepository) {
         this.capitalRepository = capitalRepository;
     }
 

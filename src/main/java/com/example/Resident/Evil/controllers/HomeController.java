@@ -14,6 +14,12 @@ import java.util.List;
 @Controller
 public class HomeController {
 
+    @GetMapping("/")
+    public ModelAndView index(ModelAndView modelAndView){
+        modelAndView.setViewName("index");
+        return modelAndView;
+    }
+
     @PostMapping("/")
     public ModelAndView indexPost(ModelAndView modelAndView){
         modelAndView.setViewName("index");

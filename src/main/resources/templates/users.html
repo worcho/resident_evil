@@ -23,11 +23,54 @@
             <th th:text="*{username}"></th>
             <th th:text="*{email}"></th>
             <th th:text="*{role}"></th>
-            <th><a th:href=@{edit/{id}(id=${user.id})} class="btn btn-primary" role="button">Edit</a></th>
-            <th><a th:href=@{delete/{id}(id=${user.id})} class="btn btn-danger" role="button">Delete</a></th>
+            <th><button type="button"  th:id="*{id}"  class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editModal">
+                Edit
+            </button></th>
+            <th><button type="button"  th:id="*{id}"  class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">
+                Delete
+            </button></th>
         </tr>
         </tbody>
     </table>
 </div>
+<form th:action="@{'/edit/' + ${id}}" th:method="POST" th:id="myForm" class="mx-1 mx-md-4">
+    <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <label>Select role: </label>
+                    <select class="form-select" name="role" aria-label="Default select example">
+                        <option th:value="USER">User</option>
+                        <option th:value="MODERATOR">Moderator</option>
+                    </select>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<form th:action="@{'/delete/' + ${id}}" th:method="POST" th:id="myForm2" class="mx-1 mx-md-4">
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel2">Are you sure?</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                    <button type="submit" class="btn btn-primary">Yes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
 </body>
 </html>

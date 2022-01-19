@@ -69,3 +69,19 @@ $( document ).ready(function(){
     );
 });
 })
+
+$(document).ready(function(){
+    $(".table .btn").click(function(){
+        var id = $(this).attr('id');
+        $('#myForm').attr('action', '/edit/' + id);
+        console.log(id)
+    })
+})
+
+$(document).ready(function(){
+    $(".table .btn").click(function(){
+        var id = $(this).attr('id');
+        $('#myForm2').attr('action', '/delete/' + id);
+        console.log(id)
+    })
+})

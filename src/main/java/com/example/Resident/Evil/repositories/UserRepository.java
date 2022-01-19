@@ -18,5 +18,8 @@ public interface UserRepository extends JpaRepository<User,Long> {
             ,nativeQuery = true)
     User findByEmail(String email);
 
-    // List<User> findAll();
+
+    @Query(value = "select * from user where id=?1"
+            ,nativeQuery = true)
+    User getById(Long id);
 }
