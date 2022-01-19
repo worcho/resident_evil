@@ -75,7 +75,6 @@ public class VirusController {
             AddVirusBindingModel bindingModel = modelMapper.map(virusById, AddVirusBindingModel.class);
             model.addAttribute("caps", virusRepository.findAllVirusCapitals(virusesId));
             model.addAttribute("virusInput", bindingModel);
-            model.addAttribute("flag", true);
         }
         modelAndView.addObject("addVirusBindingModel",addVirusBindingModel);
 
