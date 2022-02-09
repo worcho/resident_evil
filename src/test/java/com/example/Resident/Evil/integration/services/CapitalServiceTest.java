@@ -18,6 +18,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 
+import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 
 @SpringBootTest
@@ -54,22 +56,20 @@ public class CapitalServiceTest {
 
         var result = capitalService.getAllCapitals();
         CapitalServiceModel capitalResult = result.get(0);
-        /*
+
         assertEquals(1, result.size());
         assertEquals(capitalName, capitalResult.getName());
         assertEquals(capitalId, capitalResult.getCapitalId());
         assertEquals(capitalLatitude, capitalResult.getLatitude());
         assertEquals(capitalLongitude, capitalResult.getLongitude());
-
-         */
+        
     }
     @Test
     public void findAllCapitals_whenNoCapitals(){
 
         capitals.clear();
         var result = capitalService.getAllCapitals();
-        /*
+
         assertTrue(result.isEmpty());
-         */
     }
 }
