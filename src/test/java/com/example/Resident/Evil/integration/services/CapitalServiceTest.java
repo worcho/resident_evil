@@ -62,7 +62,7 @@ public class CapitalServiceTest {
         assertEquals(capitalId, capitalResult.getCapitalId());
         assertEquals(capitalLatitude, capitalResult.getLatitude());
         assertEquals(capitalLongitude, capitalResult.getLongitude());
-        
+
     }
     @Test
     public void findAllCapitals_whenNoCapitals(){
