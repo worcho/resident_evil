@@ -4,11 +4,14 @@ import com.example.Resident.Evil.entities.Capital;
 import com.example.Resident.Evil.entities.Virus;
 import com.example.Resident.Evil.entities.enums.VirusMagnitude;
 import com.example.Resident.Evil.models.binding.AddVirusBindingModel;
+import com.example.Resident.Evil.models.service.VirusServiceModel;
 import com.example.Resident.Evil.repositories.CapitalRepository;
 import com.example.Resident.Evil.repositories.VirusRepository;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
@@ -16,26 +19,35 @@ public class VirusServiceImpl implements VirusService{
 
     private final CapitalRepository capitalRepository;
     private final VirusRepository virusRepository;
+    private final ModelMapper modelMapper;
 
-    public VirusServiceImpl(CapitalRepository capitalRepository, VirusRepository virusRepository) {
+    public VirusServiceImpl(CapitalRepository capitalRepository, VirusRepository virusRepository, ModelMapper modelMapper) {
         this.capitalRepository = capitalRepository;
         this.virusRepository = virusRepository;
+        this.modelMapper = modelMapper;
     }
 
     @Override
-    public Virus getVirusFromForm(AddVirusBindingModel model) {
-        Virus virus = new Virus();
-        virus.setName(model.getName());
-        virus.setDescription(model.getDescription());
-        virus.setSideEffects(model.getSideEffects());
-        virus.setCreator(model.getCreator());
-        virus.setIsDeadly(model.getIsDeadly());
-        virus.setIsCurable(model.getIsCurable());
-        virus.setMutation(model.getMutation());
-        virus.setTurnoverRate(model.getTurnoverRate());
-        virus.setHoursUntilTurn(model.getHoursUntilTurn());
-        virus.setMagnitude(model.getMagnitude());
-        virus.setReleaseOn(model.getReleaseOn());
+    public VirusServiceModel getVirusById(Long id) {
+        return modelMapper.map(virusRepository.getById(id),VirusServiceModel.class);
+    }
+
+    @Override
+    public List<String> findAllVirusCapitals(Long id) {
+        return virusRepository.findAllVirusCapitals(id);
+    }
+
+    @Override
+    public List<VirusServiceModel> getAllViruses() {
+        return virusRepository.findAll()
+                .stream()
+                .map(v -> modelMapper.map(v,VirusServiceModel.class))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public void addVirus(VirusServiceModel model) {
+        Virus virus = modelMapper.map(model,Virus.class);
         if (virus.getIsDeadly() == null){
             virus.setIsDeadly("No");
         }
@@ -45,22 +57,12 @@ public class VirusServiceImpl implements VirusService{
         virus.setCapitals(Arrays.stream(model.getCapitals())
                 .map(x -> capitalRepository.findByName(x))
                 .collect(Collectors.toSet()));
-        return virus;
+        virusRepository.save(virus);
     }
 
     @Override
-    public void saveMany(Long virusId, AddVirusBindingModel model) {
-        for (int i = 0; i < model.getCapitals().length; i++) {
-            Capital capital = capitalRepository.findByName(model.getCapitals()[i]);
-            Long capitalId = capital.getCapitalId();
-            virusRepository.saveManyToMany(virusId,capitalId);
-        }
-    }
-
-    @Override
-    public void editVirus(Long virusId, AddVirusBindingModel model) {
+    public void editVirus(Long virusId, VirusServiceModel model) {
         Virus virus = virusRepository.getById(virusId);
-
         virus.setName(model.getName());
         virus.setDescription(model.getDescription());
         virus.setSideEffects(model.getSideEffects());
@@ -71,16 +73,19 @@ public class VirusServiceImpl implements VirusService{
         virus.setTurnoverRate(model.getTurnoverRate());
         virus.setHoursUntilTurn(model.getHoursUntilTurn());
         virus.setMagnitude(model.getMagnitude());
-        //     virus.setReleaseOn(model.getReleaseOn());
         if (virus.getIsDeadly() == null){
             virus.setIsDeadly("No");
         }
         if (virus.getIsCurable() == null){
             virus.setIsCurable("No");
         }
-
         virusRepository.save(virus);
 
+    }
+
+    @Override
+    public void deleteVirus(Long virusId) {
+        virusRepository.deleteById(virusId);
     }
 
     @Override

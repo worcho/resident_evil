@@ -5,7 +5,12 @@
 
 <th:block th:include="fragments/navbar"></th:block>
 
-<div class="d-flex justify-content-center">
+<div class="input-group w-25 p-3 justify-content-center" style="margin-left: 220px;">
+    <input type="search" class="form-control rounded" placeholder="Search by username" aria-label="Search" aria-describedby="search-addon" name="username" id="usernameHolder"/>
+    <button type="button" class="btn btn-outline-primary" id="searchBtn">search</button>
+</div>
+<div class="d-flex justify-content-center" id="tableDiv">
+
     <table class="table table-striped w-75 p-3">
         <thead>
         <tr>

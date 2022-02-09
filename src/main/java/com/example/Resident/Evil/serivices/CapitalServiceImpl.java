@@ -5,9 +5,6 @@ import com.example.Resident.Evil.models.service.CapitalServiceModel;
 import com.example.Resident.Evil.repositories.CapitalRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -17,7 +14,6 @@ import java.util.stream.Collectors;
 @Service
 public class CapitalServiceImpl implements CapitalService{
 
-
     private final CapitalRepository capitalRepository;
     private final ModelMapper modelMapper;
 
@@ -25,20 +21,6 @@ public class CapitalServiceImpl implements CapitalService{
     public CapitalServiceImpl(CapitalRepository capitalRepository, ModelMapper modelMapper) {
         this.capitalRepository = capitalRepository;
         this.modelMapper = modelMapper;
-    }
-
-    @Override
-    public List<CapitalServiceModel> getAllCapitals() {
-        return capitalRepository.findAll()
-                .stream()
-                .map(x -> modelMapper.map(x,CapitalServiceModel.class))
-                .collect(Collectors.toList());
-    }
-
-
-    @Override
-    public CapitalServiceModel getByName(String name) {
-        return modelMapper.map(this.capitalRepository.findByName(name),CapitalServiceModel.class);
     }
 
     @Override
@@ -52,10 +34,10 @@ public class CapitalServiceImpl implements CapitalService{
     }
 
     @Override
-    public Page<Capital> getCapitals(Pageable pageable) {
-  //      Pageable pageable = PageRequest.of(capitalPage.getPageNumber(),capitalPage.getPageSize());
-        return this.capitalRepository.findAll(pageable);
+    public List<CapitalServiceModel> getAllCapitals() {
+        return this.capitalRepository.findAll()
+                .stream()
+                .map(c -> modelMapper.map(c,CapitalServiceModel.class))
+                .collect(Collectors.toList());
     }
-
-
 }

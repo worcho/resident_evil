@@ -21,8 +21,6 @@ public class RegisterUserBindingModel {
     @isFreeEmail(message = "This email is already taken.")
     private String email;
 
-
-
     public String getUsername() {
         return username;
     }

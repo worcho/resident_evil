@@ -43,7 +43,6 @@ public class Virus {
     @Column(nullable = false)
     private VirusMagnitude magnitude;
     private String releaseOn;
-
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "viruses_capitals",
@@ -58,7 +57,6 @@ public class Virus {
     )
     @JsonIgnore
     private Set<Capital> capitals;
-
 
     public Set<Capital> getCapitals() {
         return capitals;
@@ -115,7 +113,6 @@ public class Virus {
     public void setCreator(String creator) {
         this.creator = creator;
     }
-
 
     public VirusMutation getMutation() {
         return mutation;

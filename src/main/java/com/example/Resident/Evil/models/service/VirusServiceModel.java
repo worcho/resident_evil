@@ -1,22 +1,45 @@
 package com.example.Resident.Evil.models.service;
 
+import com.example.Resident.Evil.entities.enums.VirusMagnitude;
+import com.example.Resident.Evil.entities.enums.VirusMutation;
+
 import java.time.LocalDate;
 import java.util.Set;
 
 public class VirusServiceModel {
 
-    private String id;
+    private String virusId;
 
     private String name;
 
     private String description;
 
-    public String getId() {
-        return id;
+    private String sideEffects;
+
+    private String creator;
+
+    private String isDeadly;
+
+    private String isCurable;
+
+    private VirusMutation mutation;
+
+    private Integer turnoverRate;
+
+    private Integer hoursUntilTurn;
+
+    private VirusMagnitude magnitude;
+
+    private String releaseOn;
+
+    private String[] capitals;
+
+    public String getVirusId() {
+        return virusId;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setVirusId(String virusId) {
+        this.virusId = virusId;
     }
 
     public String getName() {
@@ -67,11 +90,11 @@ public class VirusServiceModel {
         this.isCurable = isCurable;
     }
 
-    public String getMutation() {
+    public VirusMutation getMutation() {
         return mutation;
     }
 
-    public void setMutation(String mutation) {
+    public void setMutation(VirusMutation mutation) {
         this.mutation = mutation;
     }
 
@@ -91,47 +114,27 @@ public class VirusServiceModel {
         this.hoursUntilTurn = hoursUntilTurn;
     }
 
-    public String getMagnitude() {
+    public VirusMagnitude getMagnitude() {
         return magnitude;
     }
 
-    public void setMagnitude(String magnitude) {
+    public void setMagnitude(VirusMagnitude magnitude) {
         this.magnitude = magnitude;
     }
 
-    public String getReleasedOn() {
-        return releasedOn;
+    public String getReleaseOn() {
+        return releaseOn;
     }
 
-    public void setReleasedOn(String releasedOn) {
-        this.releasedOn = releasedOn;
+    public void setReleaseOn(String releasedOn) {
+        this.releaseOn = releasedOn;
     }
 
-    public Set<String> getCapitals() {
+    public String[] getCapitals() {
         return capitals;
     }
 
-    public void setCapitals(Set<String> capitals) {
+    public void setCapitals(String[] capitals) {
         this.capitals = capitals;
     }
-
-    private String sideEffects;
-
-    private String creator;
-
-    private String isDeadly;
-
-    private String isCurable;
-
-    private String mutation;
-
-    private Integer turnoverRate;
-
-    private Integer hoursUntilTurn;
-
-    private String magnitude;
-
-    private String releasedOn;
-
-    private Set<String> capitals;
 }

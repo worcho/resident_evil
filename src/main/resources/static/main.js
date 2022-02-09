@@ -85,3 +85,52 @@ $(document).ready(function(){
         console.log(id)
     })
 })
+
+$( document ).ready(function(){
+    $( "#searchBtn" ).click(function() {
+        var usernameHolder = $('#usernameHolder').val();
+        $.get('/searchedUser/'+usernameHolder, data =>{
+            if(!data){
+                $('#tableDiv').html('<b style="font-size:300%;color:red">User not found</b>')
+            }
+            if(data){
+            $('#tableDiv').html('<table id="mytable" class="table table-striped w-75 p-3">'
+                +'<thead>'
+                +'<tr>'
+                +'<th scope="col">#</th>'
+                +'<th scope="col">Username</th>'
+                +'<th scope="col">Email</th>'
+                +'<th scope="col">Role</th>'
+                +'<th scope="col"></th>'
+                +'<th scope="col"></th>'
+                +'</tr>'
+                +'</thead>'
+                +'<tbody>'
+                +'<tr>'
+                +'<th id="dataID">'+data.id+'</th>'
+                +'<th>'+data.username+'</th>'
+                +'<th>'+data.email+'</th>'
+                +'<th>'+data.role+'</th>'
+                +'<th><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editModal">Edit'
+                +'</button>'
+                +'</th>'
+                +'<th><button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">Delete'
+                +'</button>'
+                +'</th>'
+                +'</tr>'
+                +'</tbody>'
+                +'</table>'
+                )
+            } }
+        ).done(function(){
+            var id = $('#dataID').text();
+            $('.btn-primary').attr('id', id);
+        }).done(function(){
+            $(".table .btn").click(function(){
+                var id = $(this).attr('id');
+                $('#myForm').attr('action', '/edit/' + id);
+                console.log(id)
+            })
+        })
+    });
+});

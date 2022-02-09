@@ -14,8 +14,11 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class UserServiceImpl implements UserService, UserDetailsService {
@@ -23,7 +26,6 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     private final UserRepository userRepository;
     private final ModelMapper modelMapper;
     private final PasswordEncoder passwordEncoder;
-
 
     @Autowired
     public UserServiceImpl(UserRepository userRepository, ModelMapper modelMapper, PasswordEncoder passwordEncoder) {
@@ -33,12 +35,33 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
-    public void registerUser(RegisterUserBindingModel userBindingModel) {
-        User user = new User();
-        modelMapper.map(userBindingModel, user);
-        user.setPassword(passwordEncoder.encode(userBindingModel.getPassword()));
+    public void registerUser(UserServiceModel userServiceModel) {
+        User user = modelMapper.map(userServiceModel, User.class);
+        user.setPassword(passwordEncoder.encode(userServiceModel.getPassword()));
         user.setRole("USER");
         userRepository.save(user);
+    }
+
+    @Override
+    public UserServiceModel searchedByUsername(String username) {
+        return modelMapper.map(this.userRepository.findByUsername(username),UserServiceModel.class);
+    }
+
+    @Override
+    public List<UserServiceModel> getAllUsers() {
+        return userRepository.findAll()
+                .stream()
+                .map(u -> modelMapper.map(u,UserServiceModel.class))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public boolean passwordMatch(RegisterUserBindingModel userBindingModel) {
+        if (userBindingModel.getPassword().equals(userBindingModel.getConfirmPassword())) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     @Override
@@ -52,25 +75,6 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     @Override
     public void deleteUser(Long id) {
         userRepository.deleteById(id);
-    }
-
-    @Override
-    public boolean passwordMatch(RegisterUserBindingModel userBindingModel) {
-        if (userBindingModel.getPassword().equals(userBindingModel.getConfirmPassword())) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    @Override
-    public boolean loginUser(RegisterUserBindingModel userBindingModel) {
-        User username = userRepository.findByUsername(userBindingModel.getUsername());
-        if (username != null) {
-            if (username.getPassword().equals(userBindingModel.getPassword())) {
-                return true;
-            } else return false;
-        } else return false;
     }
 
     @Override
@@ -94,6 +98,5 @@ public class UserServiceImpl implements UserService, UserDetailsService {
                 role
         );
         return userDetails;
-
     }
 }

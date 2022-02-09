@@ -12,12 +12,6 @@ import java.util.List;
 @Repository
 public interface VirusRepository extends JpaRepository<Virus,Long> {
 
-    @Transactional
-    @Modifying
-    @Query(value = "insert into viruses_capitals(virus_id,capital_id) values(?1,?2)"
-    , nativeQuery = true)
-    void saveManyToMany(Long virusId, Long capitalId);
-
     List<Virus> findAll();
 
     @Query(value = "SELECT capital.name FROM capital\n" +

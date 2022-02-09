@@ -1,16 +1,11 @@
 package com.example.Resident.Evil.models.binding;
 
-
-import com.example.Resident.Evil.entities.Capital;
 import com.example.Resident.Evil.entities.enums.VirusMagnitude;
 import com.example.Resident.Evil.entities.enums.VirusMutation;
 
 import javax.validation.constraints.*;
-import java.time.LocalDate;
-import java.util.List;
-import java.util.Set;
 
-public class AddVirusBindingModel {
+public class EditVirusBindingModel {
 
     @NotEmpty(message = "Virus name cannot be empty.")
     @Size(min=3, max=10, message = "Virus name must be between 3 and 10 symbols long.")
@@ -32,10 +27,9 @@ public class AddVirusBindingModel {
     @Max(value = 12, message = "Virus turnover rate must be less than or equal to 12.")
     private Integer hoursUntilTurn;
     private VirusMagnitude magnitude;
-    @NotEmpty(message = "Should choose starting data.")
-    private String releaseOn;
-    @NotEmpty(message = "Should choose starting point.")
-    private String[] capitals;
+
+    public EditVirusBindingModel() {
+    }
 
     public String getName() {
         return name;
@@ -116,22 +110,4 @@ public class AddVirusBindingModel {
     public void setMagnitude(VirusMagnitude magnitude) {
         this.magnitude = magnitude;
     }
-
-    public String getReleaseOn() {
-        return releaseOn;
-    }
-
-    public void setReleaseOn(String releaseOn) {
-        this.releaseOn = releaseOn;
-    }
-
-    public String[] getCapitals() {
-        return capitals;
-    }
-
-    public void setCapitals(String[] capitals) {
-        this.capitals = capitals;
-    }
-
-
 }

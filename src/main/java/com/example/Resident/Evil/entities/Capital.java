@@ -9,7 +9,6 @@ import java.util.Set;
 @Entity
 public class Capital {
 
-
         @Id
         @Column(name = "capitalId", updatable = false, nullable = false)
         private Long capitalId;
@@ -19,7 +18,6 @@ public class Capital {
         private Double Latitude;
         @Column(nullable = false)
         private Double Longitude;
-
         @JsonIgnore
         @ManyToMany(mappedBy = "capitals", fetch = FetchType.LAZY)
         private Set<Virus> virusSet;

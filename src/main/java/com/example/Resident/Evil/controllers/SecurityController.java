@@ -24,13 +24,11 @@ public class SecurityController {
         return modelAndView;
     }
 
-
     @GetMapping("/accessError")
     public ModelAndView getAccessDenied(ModelAndView modelAndView) {
         modelAndView.setViewName("error1");
         return modelAndView;
     }
-
 
     @GetMapping("/logout")
     public String logoutPage (HttpServletRequest request, HttpServletResponse response) {

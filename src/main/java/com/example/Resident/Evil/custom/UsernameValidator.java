@@ -7,9 +7,7 @@ import javax.validation.ConstraintValidatorContext;
 
 public class UsernameValidator implements ConstraintValidator<Username, String> {
 
-
     private final UserRepository userRepository;
-
     public UsernameValidator(UserRepository userRepository) {
         this.userRepository = userRepository;
     }

@@ -8,7 +8,6 @@ import javax.validation.ConstraintValidatorContext;
 public class isFreeEmailValidator implements ConstraintValidator<isFreeEmail,String> {
 
     private final UserRepository userRepository;
-
     public isFreeEmailValidator(UserRepository userRepository) {
         this.userRepository = userRepository;
     }

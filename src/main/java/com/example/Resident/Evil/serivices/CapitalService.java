@@ -11,12 +11,8 @@ import java.util.List;
 
 public interface CapitalService {
 
-    List<CapitalServiceModel> getAllCapitals();
-
-    CapitalServiceModel getByName(String name);
-
     List<String> getAllCapitalsNames();
 
-    Page<Capital> getCapitals(Pageable pageable);
+    List<CapitalServiceModel> getAllCapitals();
 
 }
