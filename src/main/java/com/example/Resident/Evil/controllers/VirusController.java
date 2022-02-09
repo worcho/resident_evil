@@ -68,15 +68,17 @@ public class VirusController {
         VirusServiceModel viewModel = modelMapper.map(virusService.getVirusById(id), VirusServiceModel.class);
         modelAndView.setViewName("Edit-virus");
         virusesId = id;
+
         modelAndView.addObject("caps", virusService.findAllVirusCapitals(id));
         modelAndView.addObject("virusInput", viewModel);
         modelAndView.addObject("editVirusBindingModel",viewModel);
         if (viewModel.getIsDeadly().equals("Yes")){
             modelAndView.addObject("flag1", true);
         }
-        if (viewModel.getIsCurable().equals("Yes")){
+        if (viewModel.getIsCurable().equals("Yes")) {
             modelAndView.addObject("flag2", true);
         }
+        
         return modelAndView;
     }
 
